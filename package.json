@@ -1,0 +1,38 @@
+{
+  "name": "intersection-observer-hooks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src -d ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ScriptedAlchemy/intersection-observer-hooks.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ScriptedAlchemy/intersection-observer-hooks/issues"
+  },
+  "homepage": "https://github.com/ScriptedAlchemy/intersection-observer-hooks#readme",
+  "files": [
+    "index.js",
+    "useIntersectionObserver.js"
+  ],
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  },
+  "dependencies": {
+    "@babel/preset-env": "^7.6.0",
+    "@babel/preset-react": "^7.0.0",
+    "intersection-observer": "^0.7.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.0",
+    "@babel/core": "^7.6.0"
+  }
+}
