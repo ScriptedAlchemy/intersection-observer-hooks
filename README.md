@@ -1,7 +1,7 @@
 
 
 
-`import {useIntersectionObserver} from "intersection-observer-hooks"`
+`import {useIntersectionObserver, addTrackedLoader} from "intersection-observer-hooks"`
 
 API:
 
@@ -17,6 +17,8 @@ API:
 Example use:
 
 ```js
+import {useIntersectionObserver, addTrackedLoader} from "intersection-observer-hooks"
+
   useIntersectionObserver((visible) => {
     // then we are not at SSR
     ssr.current = false;
@@ -27,4 +29,19 @@ Example use:
     rootMargin: '30%',
     rootRef,
   });
+
+
+  useEffect(() => {
+    if (eager) {
+      return addTrackedLoader(
+        () => {
+          setOffscreen(false);
+          onVisibilitySet(true);
+        },
+        containerRef || ref,
+      );
+    }
+
+    return () => null;
+  }, [eager]);
 ```
