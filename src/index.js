@@ -4,7 +4,7 @@ import useIntersectionObserver from "./useIntersectionObserver";
 const trackedLoaders = [];
 let trackedTm = 0;
 
-const trackedTick = () => {
+const trackedTick = () => selectors => {
     let el = trackedLoaders.shift();
     if (el) {
         // display the image
@@ -12,7 +12,7 @@ const trackedTick = () => {
         Promise.resolve().then(() => {
             // find already displayed image and track the loading state
             const target = el.ref.current;
-            const img = target.querySelector('picture img, img') || target;
+            const img = target.querySelector(selectors || 'picture img, img') || target;
             const done = () => {
                 if (!el) {
                     return;
@@ -43,16 +43,16 @@ const trackedTick = () => {
     }
 };
 
-function chargeTrackedLoader() {
+function chargeTrackedLoader(selectors) {
     if (!trackedTm) {
-        trackedTm = setTimeout(trackedTick, 16);
+        trackedTm = setTimeout(trackedTick(selectors), 16);
     }
 }
 
-const addTrackedLoader = (callback, ref) => {
+const addTrackedLoader = (callback, ref, selectors) => {
     trackedLoaders.push({callback, ref});
     if (trackedLoaders.length === 1) {
-        chargeTrackedLoader();
+        chargeTrackedLoader(selectors);
     }
 };
 
